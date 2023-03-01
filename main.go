@@ -48,6 +48,19 @@ func superAdd(numbers ...int) int {
 	return total
 }
 
+func canIDrink(age int) bool {
+	// 조건문에서 koreanAge 변수 선언과 동시에 명령 수행 -> 이 경우, koreanAge 변수는 조건문 안에서만 쓰임
+	if koreanAge := age + 2; koreanAge < 18 {
+		return false
+	}
+	return true
+}
+
+func canIDrink2(age int) bool {
+	koreanAge := age + 2
+	return koreanAge >= 18
+}
+
 func main() {
 	const val string = "val"
 	// 축약형 변수 선언 => 오직 func 안에서만 작동
@@ -79,4 +92,9 @@ func main() {
 	*/
 	result := superAdd(1, 2, 3, 4, 5, 6)
 	fmt.Println(result) // 21
+	fmt.Println("---------------")
+	fmt.Println(canIDrink(16))  // true
+	fmt.Println(canIDrink(15))  // false
+	fmt.Println(canIDrink2(16)) // true
+	fmt.Println(canIDrink2(15)) // false
 }
