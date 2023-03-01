@@ -19,14 +19,17 @@ func lenAndUpper2(name string) (length int, uppercase string) {
 }
 
 func multiply(a int, b int) int {
+	defer fmt.Println("function multiply done.")
 	return a * b
 }
 
 func repeatMe(words ...string) {
+	defer fmt.Println("function repeatMe done.")
 	fmt.Println(words)
 }
 
 func superAddEx(numbers ...int) int {
+	defer fmt.Println("function superAddEx done.")
 	// Go 에서 for 문은 range 를 통해 최소 두 개 인자를 받게 돼 있으며,
 	// 첫 번째 인자가배열의 인덱스,
 	// 두 번째 인자가 실제 요소값이다. *
@@ -41,6 +44,7 @@ func superAddEx(numbers ...int) int {
 }
 
 func superAdd(numbers ...int) int {
+	defer fmt.Println("function superAdd done.")
 	total := 0
 	for _, number := range numbers {
 		total += number
@@ -49,6 +53,7 @@ func superAdd(numbers ...int) int {
 }
 
 func canIDrink(age int) bool {
+	defer fmt.Println("function canIDrink done.")
 	// 조건문에서 koreanAge 변수 선언과 동시에 명령 수행 -> 이 경우, koreanAge 변수는 조건문 안에서만 쓰임
 	if koreanAge := age + 2; koreanAge < 18 {
 		return false
@@ -57,8 +62,35 @@ func canIDrink(age int) bool {
 }
 
 func canIDrink2(age int) bool {
+	defer fmt.Println("function canIDrink2 done.")
 	koreanAge := age + 2
 	return koreanAge >= 18
+}
+
+func canIDrink3(age int) bool {
+	defer fmt.Println("function canIDrink3 done.")
+	// switch 역시 변수선언과 동시에 명령 수행 가능
+	switch koreanAge := age + 2; koreanAge {
+	case 10:
+		return false
+	case 18:
+		return true
+	}
+	return false
+}
+
+func canIDrink4(age int) bool {
+	defer fmt.Println("function canIDrink4 done.")
+	// switch 문에 변수를 생략하면, case 문에 조건식 입력도 가능
+	switch {
+	case age+2 < 18:
+		return false
+	case age+2 == 18:
+		return true
+	case age+2 > 50:
+		return false
+	}
+	return false
 }
 
 func main() {
@@ -97,4 +129,8 @@ func main() {
 	fmt.Println(canIDrink(15))  // false
 	fmt.Println(canIDrink2(16)) // true
 	fmt.Println(canIDrink2(15)) // false
+	fmt.Println(canIDrink3(16)) // true
+	fmt.Println(canIDrink3(15)) // false
+	fmt.Println(canIDrink4(16)) // true
+	fmt.Println(canIDrink4(15)) // false
 }
