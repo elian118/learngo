@@ -3,6 +3,7 @@ package main // 컴퓨터가 컴파일하는 파일은 오직 main 패키지 뿐
 import (
 	"fmt"
 	"github.com/elian/learngo/accounts"
+	"github.com/elian/learngo/common"
 	"github.com/elian/learngo/mydict"
 	"github.com/elian/learngo/something"
 )
@@ -56,15 +57,20 @@ func bank() {
 
 func dict() {
 	dictionary := mydict.Dictionary{"first": "First word"}
+	word := "Hello"
+	def := "Greeting"
+
 	fmt.Println(dictionary) // map[first:First word]
 	dictionary["second"] = "hello"
 	fmt.Println(dictionary) // map[first:First word second:hello]
 	definition, err := dictionary.Search("third")
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(definition) // Not Found
-	}
+	common.ErrHandler2(definition, err) // Not Found
+	err = dictionary.Add(word, def)
+	common.ErrHandler(err) // 에러가 없어 건너 뜀
+	err = dictionary.Add(word, def)
+	common.ErrHandlerForDict(word, definition, err) // That word already exists
+	definition, err = dictionary.Search(word)
+	common.ErrHandlerForDict(word, definition, err) // found: Hello / definition: Greeting
 }
 
 func main() {
