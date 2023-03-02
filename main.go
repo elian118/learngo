@@ -3,6 +3,7 @@ package main // 컴퓨터가 컴파일하는 파일은 오직 main 패키지 뿐
 import (
 	"fmt"
 	"github.com/elian/learngo/accounts"
+	"github.com/elian/learngo/mydict"
 	"github.com/elian/learngo/something"
 )
 
@@ -29,7 +30,7 @@ func theory() {
 	something.ShowStruct()
 }
 
-func bankAndDictionary() {
+func bank() {
 	// theory()
 	account := accounts.NewAccount("elian")
 	fmt.Println(account) // &{elian 0}
@@ -45,16 +46,27 @@ func bankAndDictionary() {
 	if err != nil {
 		// log.Fatalln(err) // 2023/03/02 13:30:36 Can't withdraw. -> 에러 띄우고 프로그램 종료
 		fmt.Println(err) // Can't withdraw. -> 프로그램 실행 유지(예외처리)
-
 	}
 	fmt.Println(account.Balance(), account.Owner()) // 5 elian
 	account.ChangeOwner("nico")
 	fmt.Println(account.Balance())                  // 5
 	fmt.Println(account.Balance(), account.Owner()) // 5 nico
 	fmt.Println(account)                            // &{nico 5} -> String 오버라이드 -> nico's account. Has: 5
+}
 
+func dict() {
+	dictionary := mydict.Dictionary{"first": "First word"}
+	fmt.Println(dictionary) // map[first:First word]
+	dictionary["second"] = "hello"
+	fmt.Println(dictionary) // map[first:First word second:hello]
+	definition, err := dictionary.Search("third")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(definition) // Not Found
+	}
 }
 
 func main() {
-	bankAndDictionary()
+	dict()
 }
