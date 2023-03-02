@@ -59,18 +59,39 @@ func dict() {
 	dictionary := mydict.Dictionary{"first": "First word"}
 	word := "Hello"
 	def := "Greeting"
+	baseWord := "hello"
 
+	fmt.Println("----- 1) add to use map")
 	fmt.Println(dictionary) // map[first:First word]
 	dictionary["second"] = "hello"
 	fmt.Println(dictionary) // map[first:First word second:hello]
+	fmt.Println("----- 2) add and search to use method")
 	definition, err := dictionary.Search("third")
 	common.ErrHandler2(definition, err) // Not Found
 	err = dictionary.Add(word, def)
+	fmt.Println(dictionary)
 	common.ErrHandler(err) // 에러가 없어 건너 뜀
 	err = dictionary.Add(word, def)
 	common.ErrHandlerForDict(word, definition, err) // That word already exists
 	definition, err = dictionary.Search(word)
 	common.ErrHandlerForDict(word, definition, err) // found: Hello / definition: Greeting
+	fmt.Println("----- 3) update and search to use method")
+	_ = dictionary.Add(baseWord, "Forth")
+	fmt.Println(dictionary)
+	err = dictionary.Update(baseWord, "Forth - updated")
+	fmt.Println(dictionary)
+	common.ErrHandler(err)
+	value, _ := dictionary.Search(baseWord)
+	fmt.Println(value)
+	err = dictionary.Update("Fifth", "Fifth - updated 2") // Can't update non-existing word
+	common.ErrHandler(err)
+	fmt.Println("----- 4) delete and search to use method")
+	err = dictionary.Delete("Fifth")
+	common.ErrHandler(err) // Can't delete non-existing word
+	_ = dictionary.Delete(baseWord)
+	fmt.Println(dictionary)
+	definition, err = dictionary.Search(baseWord)
+	common.ErrHandlerForDict(baseWord, definition, err) // Not Found
 }
 
 func main() {
