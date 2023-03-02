@@ -22,4 +22,6 @@ func main() {
 	something.ShowGetMemorizedInfo()
 	fmt.Println("--------array-------")
 	something.ShowArr()
+	fmt.Println("--------map-------")
+	something.ShowMap()
 }
