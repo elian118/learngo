@@ -24,4 +24,6 @@ func main() {
 	something.ShowArr()
 	fmt.Println("--------map-------")
 	something.ShowMap()
+	fmt.Println("--------structs == object-------")
+	something.ShowStruct()
 }
