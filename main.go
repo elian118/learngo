@@ -36,4 +36,6 @@ func main() {
 	// 물론, Account 각 필드는 모두 private 속성(소문자)이라, 아래 코드 실행 불가
 	// accounts.balance = 100000
 	// accounts.owner = "pepe"
+	account.Deposit(100000000)
+	fmt.Println(account.Balance()) // 0 -> 변경되지 않았다.
 }
