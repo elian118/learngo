@@ -20,4 +20,6 @@ func main() {
 	something.ShowResultCaIDrink()
 	fmt.Println("--------variable-------")
 	something.ShowGetMemorizedInfo()
+	fmt.Println("--------array-------")
+	something.ShowArr()
 }
