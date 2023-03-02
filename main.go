@@ -2,10 +2,11 @@ package main // 컴퓨터가 컴파일하는 파일은 오직 main 패키지 뿐
 
 import (
 	"fmt"
+	"github.com/elian/learngo/accounts"
 	"github.com/elian/learngo/something"
 )
 
-func main() {
+func theory() {
 	fmt.Println("--------variable-------")
 	something.GetNm()
 	fmt.Println("--------calculate-------")
@@ -26,4 +27,13 @@ func main() {
 	something.ShowMap()
 	fmt.Println("--------structs == object-------")
 	something.ShowStruct()
+}
+
+func main() {
+	// theory()
+	account := accounts.NewAccount("elian")
+	fmt.Println(account) // &{elian 0}
+	// 물론, Account 각 필드는 모두 private 속성(소문자)이라, 아래 코드 실행 불가
+	// accounts.balance = 100000
+	// accounts.owner = "pepe"
 }
