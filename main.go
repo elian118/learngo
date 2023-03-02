@@ -29,13 +29,26 @@ func theory() {
 	something.ShowStruct()
 }
 
-func main() {
+func bankAndDictionary() {
 	// theory()
 	account := accounts.NewAccount("elian")
 	fmt.Println(account) // &{elian 0}
 	// 물론, Account 각 필드는 모두 private 속성(소문자)이라, 아래 코드 실행 불가
 	// accounts.balance = 100000
 	// accounts.owner = "pepe"
-	account.Deposit(100000000)
-	fmt.Println(account.Balance()) // 0 -> 변경되지 않았다.
+	account.Deposit(10)
+	fmt.Println(account.Balance()) // 10
+	_ = account.Withdraw(5)
+	fmt.Println(account.Balance()) // 5
+	err := account.Withdraw(20)
+	// 에러핸들러
+	if err != nil {
+		// log.Fatalln(err) // 2023/03/02 13:30:36 Can't withdraw. -> 에러 띄우고 프로그램 종료
+		fmt.Println(err) // Can't withdraw. -> 프로그램 실행 유지(예외처리)
+	}
+	fmt.Println(account.Balance()) // 5
+}
+
+func main() {
+	bankAndDictionary()
 }
