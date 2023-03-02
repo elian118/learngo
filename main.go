@@ -45,8 +45,14 @@ func bankAndDictionary() {
 	if err != nil {
 		// log.Fatalln(err) // 2023/03/02 13:30:36 Can't withdraw. -> 에러 띄우고 프로그램 종료
 		fmt.Println(err) // Can't withdraw. -> 프로그램 실행 유지(예외처리)
+
 	}
-	fmt.Println(account.Balance()) // 5
+	fmt.Println(account.Balance(), account.Owner()) // 5 elian
+	account.ChangeOwner("nico")
+	fmt.Println(account.Balance())                  // 5
+	fmt.Println(account.Balance(), account.Owner()) // 5 nico
+	fmt.Println(account)                            // &{nico 5} -> String 오버라이드 -> nico's account. Has: 5
+
 }
 
 func main() {
